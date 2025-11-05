@@ -1,5 +1,13 @@
-Name: Prashant Kamble
-PRN : 124B2F002
+// Name: Prashant Kamble
+// PRN : 124B2F002
+// Title : Movie Recommendation System Optimization
+// A popular OTT platform, StreamFlix, offers personalized recommendations by sorting movies
+// based on user preferences, such as IMDB rating, release year, or watch time popularity.
+// However, during peak hours, sorting large datasets slows down the system.
+// As a backend engineer, you must:
+// ● Implement Quicksort to efficiently sort movies based on various user-selected
+// parameters.
+// ● Handle large datasets containing of movies while maintaining fast response times
 class Movie {
     String title;
     double imdbRating;
@@ -85,6 +93,7 @@ Inception | 8.8 | 2010 | 5000000
 Oppenheimer | 8.7 | 2023 | 6000000
 Interstellar | 8.6 | 2014 | 7000000
 Avengers: Endgame | 8.4 | 2019 | 9000000
+
 
 
 
