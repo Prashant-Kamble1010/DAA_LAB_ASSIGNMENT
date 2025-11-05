@@ -1,3 +1,5 @@
+Name: Prashant Kamble
+PRN : 124B2F002
 import java.util.*;
 
 class Item {
@@ -70,5 +72,6 @@ public class FractionalKnapsackRelief {
 - Food Packets (60.0%) | value = 180.0
 
 🚤 Maximum total utility value carried: 860.0
+
 
 
