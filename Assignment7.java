@@ -1,3 +1,6 @@
+
+//Name: Prashant Kamble
+//PRN : 124B2F002
 import java.util.*;
 public class UniversityTimetable {
     static class Graph {
@@ -120,3 +123,4 @@ Course 2 -> Slot 0
 Course 3 -> Slot 1
 Course 4 -> Slot 0
 Total slots used: 2
+
