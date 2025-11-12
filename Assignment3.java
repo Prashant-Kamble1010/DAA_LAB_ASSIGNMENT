@@ -24,76 +24,74 @@
     
 import java.util.*;
 
-class Item {
+class Item
+{
     String name;
     double weight;
     double value;
     boolean divisible;
 
-    Item(String name, double weight, double value, boolean divisible) {
-        this.name = name;
-        this.weight = weight;
-        this.value = value;
-        this.divisible = divisible;
-    }
-
-    double ratio() {
-        return value / weight;
+    Item(String name, double weight, double value, boolean divisible)
+    {
+        this.name=name;
+        this.weight=weight;
+        this.value=value;
+        this.divisible=divisible;
     }
 }
+public class FractionalKnapsack
+{
+    public static double maximizeUtility(List<Item> items, double capacity)
+    {
+        items.sort((a,b)->Double.compare(b.value/b.weight, a.value/a.weight));
 
-public class FractionalKnapsackRelief {
-
-    public static double maximizeUtility(List<Item> items, double capacity) {
-        items.sort((a, b) -> Double.compare(b.ratio(), a.ratio()));
-
-        double totalValue = 0.0;
-        double remainingCapacity = capacity;
-
-        System.out.println("Selected items for transport:");
-        for (Item item : items) {
-            if (remainingCapacity <= 0) break;
-
-            if (item.weight <= remainingCapacity) {
-                totalValue += item.value;
-                remainingCapacity -= item.weight;
-                System.out.println("- " + item.name + " (100%) | value = " + item.value);
-            } else if (item.divisible) {
-
-                double fraction = remainingCapacity / item.weight;
-                double valueTaken = item.value * fraction;
-                totalValue += valueTaken;
-                System.out.println("- " + item.name + " (" + (fraction * 100) + "%) | value = " + valueTaken);
-                remainingCapacity = 0;
+        double totalValue=0, weight=0;
+        for(Item i:items)
+        {
+            if(weight+i.weight<=capacity)
+            {
+                weight+=i.weight;
+                totalValue+=i.value;
+                System.out.println("Taking full: " + i.name);
+            }
+            else if(i.divisible)
+            {
+                double remain=capacity-weight;
+                totalValue+=i.value*(remain/i.weight);
+                System.out.println("Taking " + remain + "kg of: " + i.name);
+                break;
             }
         }
-
+        System.out.printf("Total Utility: %.2f (%.2f kg used of %.2f)\n", totalValue, weight, capacity);
         return totalValue;
     }
+    public static void main(String[] args)
+    {
+        List<Item> items = Arrays.asList(
+                new Item("Medicine",10,120,false),
+                new Item("Food",20,100,true),
+                new Item("Water",30,90,true),
+                new Item("Blankets",15,60,false),
+                new Item("Clothes",25,75,false)
+        );
 
-    public static void main(String[] args) {
-        List<Item> items = new ArrayList<>();
-        items.add(new Item("Medical Kits", 10, 500, false));
-        items.add(new Item("Food Packets", 20, 300, true));
-        items.add(new Item("Drinking Water", 15, 200, true));
-        items.add(new Item("Blankets", 25, 150, false));
-        items.add(new Item("Baby Formula", 5, 180, false));
-
-        double boatCapacity = 40; 
-
-        double maxValue = maximizeUtility(items, boatCapacity);
-        System.out.println("\n Maximum total utility value carried: " + maxValue);
+        System.out.println("Emergency Relief Optimization");
+        double capacity=50;
+        double result = maximizeUtility(items,capacity);
+        System.out.println("✅ Maximum Utility Value: " + result);
     }
 }
 
-#Output
 
-    Selected items for transport:
-- Medical Kits (100%) | value = 500.0
-- Baby Formula (100%) | value = 180.0
-- Food Packets (60.0%) | value = 180.0
+o/p
+Emergency Relief Optimization
+Taking full: Medicine
+Taking full: Food
+Taking full: Blankets
+Taking 5.0kg of: Water
+Total Utility: 295.00 (45.00 kg used of 50.00)
+✅ Maximum Utility Value: 295.0
 
-🚤 Maximum total utility value carried: 860.0
 
 
 
